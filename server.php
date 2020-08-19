@@ -3,11 +3,16 @@
 //创建Server对象，监听 127.0.0.1:9501端口
 $serv = new Swoole\Server("127.0.0.1", 9501); 
 
+
 //监听连接进入事件
 $serv->on('Connect', function ($serv, $fd) {  
     echo "Client: Connect.\n";
 });
-
+// 设置参数
+$serv->set([
+'worker_num'=>8,  //worker进程数cpu 1-4
+'max_request'=>10000,  //
+]);
 //监听数据接收事件
 $serv->on('Receive', function ($serv, $fd, $from_id, $data) {
     $serv->send($fd, "Server: ".$data);
