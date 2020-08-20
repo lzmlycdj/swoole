@@ -5,7 +5,8 @@ $http= new Swoole\Http\Server("0.0.0.0",8811);
 $http->on('request',function($request,$response){
 
 //print_r($request->get);
-
+// 设置cookie
+$response->cookie("singwa","xsss",time()+1800);
 $response->end("sss".json_encode($request->get));
 });
 $http->start(); 
