@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html class="no-js">
+<!--<![endif]-->
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title></title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="">
+</head>
+
+<body>
+    <h1>my websocket test</h1>
+
+
+
+    <script>
+        var wsUrl = "ws://192.168.1.119:9501";
+        var websocket = new WebSocket(wsUrl);
+        websocket.onopen = function(evt) {
+            websocket.send("hello-lzm");
+            console.log("connected-swoole-success");
+        }
+        websocket.onmessage = function(evt) {
+            console.log("ws-server-returned-data:" + evt.data);
+        }
+        // close
+        websocket.onclose = function(evt){
+            console.log("close");
+        }
+
+        //error
+        websocket.onerror = function(evt,e){
+            console.log("error" + evt.data);
+        }
+    </script>
+</body>
+
+</html>
