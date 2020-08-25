@@ -37,6 +37,12 @@ class Ws
     public function onOpen($ws, $request)
     {
         var_dump($request->fd);
+        if($request->fd==1){
+            //每2s执行
+            swoole_timer_tick(2000,function($timer_id){
+             echo "2s: timerId:{$timer_id}\n";
+            });
+        }
     }
     /***
      * 监听ws消息事件
@@ -52,7 +58,13 @@ class Ws
             'fd' => $frame->fd,
         ];
         // 开始投放任务->投递异步任务10s后完成
-        $ws->task($data);
+        // $ws->task($data);
+        swoole_timer_after(5000,
+        function() use ($ws,$frame){
+          echo "5s-after\n";
+          $ws->push($frame->fd,"server-time-after:");
+        }
+    );
         $ws->push($frame->fd, "server-push:" . date("Y-m-d H:i:s"));
     }
     // 这个$data是上面投递过来的数据
