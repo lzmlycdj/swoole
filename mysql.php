@@ -60,7 +60,7 @@ class AsyMysql
         });
         return true;
     }
-}
+} 
 
 $obj = new AsyMysql();
 

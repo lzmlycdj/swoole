@@ -1,0 +1,8 @@
+异步redis-redis服务安装
+swoole使用异步redis的前置条件
+redis服务
+hiredis库
+编译swoole需要加入-enable-async-redis
+
+
+具体安装步骤 见 15-7异步Redis-hiredis安装以及swoole重新编译.mp4
